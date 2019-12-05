@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import TextForm from "./components/form/form";
+import ListMessages from "./components/listMessages/listMessages";
 
 class App extends Component {
   state = {
-    inpAuthor: '',
+    inpAuthor: 'Odmen',
     inpMessage: '',
     listMessages: []
   };
@@ -29,7 +30,8 @@ class App extends Component {
   render() {
     return (
         <div>
-          <TextForm changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.Message}/>
+          <TextForm changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.inpMessage}/>
+          <ListMessages/>
         </div>
     );
   }
