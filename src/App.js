@@ -20,9 +20,10 @@ class App extends Component {
     })
   };
 
-  createMassages = async () => {
-    const response = await axios.get('http://146.185.154.90:8000/messages');
-    this.setState({listMessages: response.data})
+  createMessages = async () => {
+    const messages = await axios.get('http://146.185.154.90:8000/messages');
+    const listMessages = messages.data;
+    this.setState({listMessages})
   };
 
   changeAuthor = e => {
@@ -33,14 +34,8 @@ class App extends Component {
     this.setState({inpMessage: e.target.value})
   };
 
-  async componentDidMount() {
-    let listMessages = [...this.state.listMessages];
-    const responce = await fetch('http://146.185.154.90:8000/messages');
-    if(responce.ok){
-      const messages = await responce.json();
-      listMessages = messages.reverse();
-      this.setState({listMessages:listMessages});
-    }
+  componentDidMount() {
+    this.createMessages()
   }
 
   render() {
