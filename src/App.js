@@ -4,7 +4,8 @@ import TextForm from "./components/form/form";
 class App extends Component {
   state = {
     inpAuthor: '',
-    inpMessage: ''
+    inpMessage: '',
+    listMessages: []
   };
 
   changeAuthor = e => {
@@ -14,6 +15,17 @@ class App extends Component {
   changeMessage = e => {
     this.setState({inpMessage: e.target.value})
   };
+
+  async componentDidMount() {
+    let listMessages = [...this.state.listMessages];
+    const responce = await fetch('http://146.185.154.90:8000/messages');
+    if(responce.ok){
+      const messages = await responce.json();
+      listMessages = messages;
+      this.setState({listMessages:listMessages});
+    }
+  }
+
   render() {
     return (
         <div>
