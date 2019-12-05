@@ -3,16 +3,21 @@ import TextForm from "./components/form/form";
 
 class App extends Component {
   state = {
-    inpVal: ''
+    inpAuthor: '',
+    inpMessage: ''
   };
 
-  changeInp = e => {
-    this.setState({inpVal: e.target.value})
+  changeAuthor = e => {
+    this.setState({inpAuthor: e.target.value})
+  };
+
+  changeMessage = e => {
+    this.setState({inpMessage: e.target.value})
   };
   render() {
     return (
         <div>
-          <TextForm changeInp={this.changeInp} inpVal={this.state.inpVal}/>
+          <TextForm changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.Message}/>
         </div>
     );
   }
