@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextForm from "./components/form/form";
 import ListMessages from "./components/listMessages/listMessages";
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -13,10 +14,15 @@ class App extends Component {
     const data = new URLSearchParams();
     data.set('author', this.state.inpAuthor);
     data.set('message',this.state.inpMessage);
-    fetch('http://146.185.154.90:8000/messages', {
+    await fetch('http://146.185.154.90:8000/messages', {
       method: 'post',
       body: data,
     })
+  };
+
+  createMassages = async () => {
+    const response = await axios.get('http://146.185.154.90:8000/messages');
+    this.setState({listMessages: response.data})
   };
 
   changeAuthor = e => {
