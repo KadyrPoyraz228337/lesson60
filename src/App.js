@@ -31,7 +31,7 @@ class App extends Component {
     return (
         <div>
           <TextForm changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.inpMessage}/>
-          <ListMessages/>
+          <ListMessages messageList={this.state.listMessages}/>
         </div>
     );
   }
