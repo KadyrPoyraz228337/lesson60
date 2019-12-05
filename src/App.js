@@ -5,7 +5,7 @@ import ListMessages from "./components/listMessages/listMessages";
 class App extends Component {
   state = {
     inpAuthor: 'Odmen',
-    inpMessage: '',
+    inpMessage: 'Some text',
     listMessages: []
   };
 
