@@ -9,6 +9,16 @@ class App extends Component {
     listMessages: []
   };
 
+  addNewMessage = async () => {
+    const data = new URLSearchParams();
+    data.set('author', this.state.inpAuthor);
+    data.set('message',this.state.inpMessage);
+    fetch('http://146.185.154.90:8000/messages', {
+      method: 'post',
+      body: data,
+    })
+  };
+
   changeAuthor = e => {
     this.setState({inpAuthor: e.target.value})
   };
@@ -22,7 +32,7 @@ class App extends Component {
     const responce = await fetch('http://146.185.154.90:8000/messages');
     if(responce.ok){
       const messages = await responce.json();
-      listMessages = messages;
+      listMessages = messages.reverse();
       this.setState({listMessages:listMessages});
     }
   }
@@ -30,7 +40,7 @@ class App extends Component {
   render() {
     return (
         <div>
-          <TextForm changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.inpMessage}/>
+          <TextForm onClick={this.addNewMessage} changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.inpMessage}/>
           <ListMessages messageList={this.state.listMessages}/>
         </div>
     );
