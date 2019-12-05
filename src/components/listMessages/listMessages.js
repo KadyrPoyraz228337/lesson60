@@ -4,7 +4,7 @@ import ListMessage from "../listMessage/listMessage";
 
 const ListMessages = props => {
     const messageList = props.messageList;
-    const list = messageList.map(elem=><ListMessage key={elem.id} text={elem.message}/>)
+    const list = messageList.map(elem=><ListMessage key={elem.id} author={elem.author} text={elem.message}/>)
     return (
         <ListGroup>
             {list}

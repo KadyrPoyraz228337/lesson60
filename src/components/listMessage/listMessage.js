@@ -3,7 +3,7 @@ import ListGroupItem from "reactstrap/es/ListGroupItem";
 
 const ListMessage = props => {
     return (
-        <ListGroupItem>{props.text}</ListGroupItem>
+        <ListGroupItem><span>{props.author}</span>  <span>{props.text}</span></ListGroupItem>
     );
 };
 
