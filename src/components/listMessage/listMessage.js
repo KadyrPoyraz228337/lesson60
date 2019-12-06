@@ -5,9 +5,14 @@ const ListMessage = (
     {author, text, date}
 ) => {
     const dateFormat = require('dateformat');
-    const messageDate = dateFormat(date, 'd.m.yy h:s');
+    const now = new Date().getDate();
+    const messageDate = +dateFormat(date, 'd') !== now ? dateFormat(date, 'd.m.yy h:s') : dateFormat(date, 'h:MM TT');
     return (
-        <ListGroupItem><span className="pr-1 mr-1 border-dark border rounded bg-light p-1">{author}</span>  <span>{text}</span><span>{messageDate}</span></ListGroupItem>
+        <ListGroupItem className='d-flex align-items-center'>
+            <span className="pr-1 mr-2 border-dark border rounded bg-light p-1">{author}</span>
+            <span>{text}</span>
+            <span className='ml-auto'>{messageDate}</span>
+        </ListGroupItem>
     );
 };
 
