@@ -19,6 +19,7 @@ class App extends Component {
     data.set('message',this.state.inpMessage);
 
     await axios.post('http://146.185.154.90:8000/messages', data);
+    document.getElementById('message').value = '';
   };
 
   createMessages = async () => {
