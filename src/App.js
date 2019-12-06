@@ -8,7 +8,8 @@ class App extends Component {
   state = {
     inpAuthor: '',
     inpMessage: '',
-    listMessages: []
+    listMessages: [],
+    intervalIndicator: true
   };
 
   addNewMessage = async (e) => {
@@ -27,13 +28,16 @@ class App extends Component {
     this.setState({listMessages})
   };
 
-  checkNewMessage = () => {
-    setInterval( async ()=> {
+  checkNewMessage = flag => {
+    const interval = setInterval( async ()=> {
       const messages = await axios.get('http://146.185.154.90:8000/messages?datetime='+this.state.listMessages[0].datetime);
       if(messages.data[0]){
         this.createMessages()
       }
     },3000)
+    if(flag === false){
+      clearInterval(interval)
+    }
   };
 
   changeAuthor = e => {
@@ -44,8 +48,12 @@ class App extends Component {
     this.setState({inpMessage: e.target.value})
   };
 
+  componentWillUnmount() {
+    this.setState({intervalIndicator: false})
+  }
+
   componentDidMount() {
-    this.checkNewMessage();
+    this.checkNewMessage(this.state.intervalIndicator);
     this.createMessages();
   }
 
