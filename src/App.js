@@ -1,28 +1,29 @@
 import React, {Component} from 'react';
 import TextForm from "./components/form/form";
 import ListMessages from "./components/listMessages/listMessages";
-import axios from 'axios';
+import Container from "reactstrap/es/Container";
+import axios from 'axios'
 
 class App extends Component {
   state = {
-    inpAuthor: 'Odmen',
-    inpMessage: 'Some text',
+    inpAuthor: '',
+    inpMessage: '',
     listMessages: []
   };
 
-  addNewMessage = async () => {
+  addNewMessage = async (e) => {
+    e.preventDefault();
+
     const data = new URLSearchParams();
     data.set('author', this.state.inpAuthor);
     data.set('message',this.state.inpMessage);
-    await fetch('http://146.185.154.90:8000/messages', {
-      method: 'post',
-      body: data,
-    })
+
+    await axios.post('http://146.185.154.90:8000/messages', data);
   };
 
   createMessages = async () => {
     const messages = await axios.get('http://146.185.154.90:8000/messages');
-    const listMessages = messages.data;
+    const listMessages = messages.data.reverse();
     this.setState({listMessages})
   };
 
@@ -35,15 +36,21 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.createMessages()
+    this.createMessages();
   }
 
   render() {
     return (
-        <div>
-          <TextForm onClick={this.addNewMessage} changeAuthor={this.changeAuthor} changeMessage={this.changeMessage} inpAuthor={this.state.inpAuthor} inpVal={this.state.inpMessage}/>
+        <Container className='d-flex flex-column align-items-center bg-light border rounded'>
+          <TextForm
+              onClick={this.addNewMessage}
+              changeAuthor={this.changeAuthor}
+              changeMessage={this.changeMessage}
+              inpAuthor={this.state.inpAuthor}
+              inpVal={this.state.inpMessage}
+          />
           <ListMessages messageList={this.state.listMessages}/>
-        </div>
+        </Container>
     );
   }
 }
