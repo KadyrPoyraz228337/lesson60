@@ -11,7 +11,7 @@ const ListMessage = (
         <ListGroupItem className='d-flex align-items-center'>
             <span className="pr-1 mr-2 border-dark border rounded bg-light p-1">{author}</span>
             <span>{text}</span>
-            <span className='ml-auto'>{messageDate}</span>
+            <span className='ml-auto text-muted' style={{fontSize: '10px'}}>{messageDate}</span>
         </ListGroupItem>
     );
 };
