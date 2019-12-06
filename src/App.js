@@ -27,6 +27,15 @@ class App extends Component {
     this.setState({listMessages})
   };
 
+  checkNewMessage = () => {
+    setInterval( async ()=> {
+      const messages = await axios.get('http://146.185.154.90:8000/messages?datetime='+this.state.listMessages[0].datetime);
+      if(messages.data[0]){
+        this.createMessages()
+      }
+    },3000)
+  };
+
   changeAuthor = e => {
     this.setState({inpAuthor: e.target.value})
   };
@@ -36,6 +45,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.checkNewMessage();
     this.createMessages();
   }
 
