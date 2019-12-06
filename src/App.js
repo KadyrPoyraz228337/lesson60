@@ -21,6 +21,7 @@ class App extends Component {
 
     await axios.post('http://146.185.154.90:8000/messages', data);
     document.getElementById('message').value = '';
+    this.setState({inpMessage: ''});
   };
 
   createMessages = async () => {
@@ -35,7 +36,7 @@ class App extends Component {
       if(messages.data[0]){
         this.createMessages()
       }
-    },3000)
+    },3000);
     if(flag === false){
       clearInterval(interval)
     }
